@@ -40,5 +40,13 @@ res.json(newitem)
 
 })
 
+app.delete('/myitems/:id', async (req, res) => {
+    try {
+        const deletedItem = await Item.findByIdAndDelete(req.params.id);
+        res.json(deletedItem);
+    } catch (error) {
+        res.status(500).json({ error: "Error deleting item" });
+    }
+});
 
 

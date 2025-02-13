@@ -23,6 +23,12 @@ const App = () => {
     axios.post(App_URL, { name });
   };
 
+  const handleDelete = (id: string) => {
+    axios.delete(`${App_URL}/${id}`).then(() => {
+      setItemList(itemlist.filter((item) => item._id !== id));
+    });
+  };
+
   return (
     <>
       <h3>Enter An Item Name</h3>
@@ -30,7 +36,9 @@ const App = () => {
       <button onClick={handleClick}>Add</button>
       <ul>
         {itemlist.map((l) => (
-          <li key={l._id}>{l.name}</li>
+          <li key={l._id}>
+            {l.name} <button onClick={() => handleDelete(l._id)}>Delete</button>
+          </li>
         ))}
       </ul>
     </>
